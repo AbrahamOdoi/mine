@@ -836,13 +836,14 @@
 				return el;
 			})
 			var output = "";
+			alert(services_arr);
 			$('#service').html('');
 			// console.log(clnts_arr)
 			var arrayLength = services_arr.length;
 			for (var j = 0; j < arrayLength; j++) {
 				$('#service').append($("<option></option>").text(services_arr[j]));
 			}
-
+			alert($('#service').html());
 			$(".clientMakePayment").click(function() {
 				// paID = $(this).value();
 				paID = $(this).data('value');
