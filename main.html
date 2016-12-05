@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>RevenueCollector</title>
+		<title>GoldMine</title>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -574,7 +574,7 @@
 						test : 'test'
 					},
 					success : function(response, status, xhr) {//run this if check is successful
-						if (xhr['status'] == '200') {
+						if (response == 'here') {
 							$.post("http://deywuro.com/mobile/goldmine/newPayment.php", {
 								paymentClient : paymentClient,
 								paymentClientN : paymentClientN,
@@ -810,19 +810,19 @@
 			clnts_json = JSON.parse(clnts_json);
 			var clnts_arr = $.map(clnts_json, function(el) {
 				return el;
-			})
+			});
 			var output = "";
 			// console.log(clnts_arr)
 			var arrayLength = clnts_arr.length;
 			for (var i = 0; i < arrayLength; i++) {
 				var fetchClient = clnts_arr[i];
 
-				output += '<li value="' + fetchClient['client_id'] + '" class="clientDetail clientMakePayment" data-collector_id="' + fetchClient['collector_id'] + '" data-name="' + fetchClient['name'] + '" data-value="' + fetchClient['client_id'] + '">';
-				output += '<a href="#newPayment" style="text-decoration: none;" value="' + fetchClient['client_id'] + '" > <font color="gray" size="3px">Name:</font>' + fetchClient['name'];
+				output += '<li value="' + fetchClient['clientId'] + '" class="clientDetail clientMakePayment" data-collector_id="' + fetchClient['agent_id'] + '" data-name="' + fetchClient['name'] + '" data-value="' + fetchClient['clientId'] + '">';
+				output += '<a href="#newPayment" style="text-decoration: none;" value="' + fetchClient['clientId'] + '" > <font color="gray" size="3px">Name:</font>' + fetchClient['name'];
 				output += '<br/>';
-				output += '<font color="gray" size="3px">ClientID: </font>' + fetchClient['client_id'];
+				output += '<font color="gray" size="3px">ClientID: </font>' + fetchClient['clientId'];
 				output += '<br/>';
-				output += '<font color="gray" size="3px">Mobile Num: </font>' + fetchClient['mobile'] + '</a>';
+				output += '<font color="gray" size="3px">Mobile Num: </font>' + fetchClient['official_phone'] + '</a>';
 				output += '</li>';
 
 			}

@@ -14,7 +14,7 @@
 		<!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700"> -->
 		<script src="js/jquery.js"></script>
 		<script src="js/script.js"></script>
-		<script src="_assets/js/index.js"></script>
+		<!-- <script src="_assets/js/index.js"></script> -->
 		<script src="js/jquery.mobile-1.4.4.min.js"></script>
 	</head>
 	<body>
@@ -115,11 +115,11 @@
 								var collector_id = data.substring(1);
 								var creds = id + '|' + pass + '|' + collector_id;
 								localStorage.setItem("creds", creds);
-
 								///fetch client list
 								$.post("http://deywuro.com/mobile/goldmine/getClients.php", {
 									collector_id : collector_id,
 								}, function(data) {
+									console.log(data);
 									if (data) {
 										// console.log(data);
 										// $("#display").html('Importing your clients...');
