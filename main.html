@@ -822,7 +822,9 @@
 				output += '<br/>';
 				output += '<font color="gray" size="3px">ClientID: </font>' + fetchClient['clientId'];
 				output += '<br/>';
-				output += '<font color="gray" size="3px">Mobile Num: </font>' + fetchClient['official_phone'] + '</a>';
+				output += '<font color="gray" size="3px">Mobile Num: </font>' + fetchClient['official_phone'];
+				output += '<br/>';
+				output += '<font color="gray" size="3px">Owing: </font>' + fetchClient['debt_brought_forward'] + '</a>';
 				output += '</li>';
 
 			}
@@ -836,14 +838,12 @@
 				return el;
 			})
 			var output = "";
-			alert(services_arr);
 			$('#service').html('');
 			// console.log(clnts_arr)
 			var arrayLength = services_arr.length;
 			for (var j = 0; j < arrayLength; j++) {
 				$('#service').append($("<option></option>").text(services_arr[j]));
 			}
-			alert($('#service').html());
 			$(".clientMakePayment").click(function() {
 				// paID = $(this).value();
 				paID = $(this).data('value');
