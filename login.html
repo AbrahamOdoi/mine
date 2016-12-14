@@ -69,13 +69,13 @@
 	//What to do when paused
 	function onPause() {
 
-		alert("paused!");
+		// alert("paused!");
 	}
 
 	//What to do when resumed
 	function onResume() {
 
-		alert("resume");
+		// alert("resume");
 	}
 
 	//What to do when offline
@@ -131,7 +131,7 @@
 
 								///fetch list of services for dropdown
 								var valz = creds.split("|");
-								var ho_id = valz[3];
+								var ho_id = valz[2];
 								$.post("http://deywuro.com/mobile/goldmine/getServices.php", {
 									ho_id : ho_id,
 								}, function(data) {
@@ -156,7 +156,6 @@
 					};
 				},
 				error : function() {
-
 					var stored_creds = localStorage.getItem("creds");
 
 					var res = stored_creds.split("|");
