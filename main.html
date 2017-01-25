@@ -478,7 +478,7 @@
 					collector_id : collector_id,
 					ho_id : ho_id
 				}, function(data) {
-
+					console.log(data);
 					if (data == 'true') {
 						alert('Client Added Successfully');
 
@@ -575,7 +575,7 @@
 					},
 					success : function(response, status, xhr) {//run this if check is successful
 						if (response == 'here') {
-							$.post("http://deywuro.com/mobile/goldmine/newPayment.php", {
+							$.post("http://deywuro.com/mobile/goldmine/bnewPayment.php", {
 								paymentClient : paymentClient,
 								paymentClientN : paymentClientN,
 								paymentType : paymentType,
@@ -585,6 +585,7 @@
 								payyear : payyear,
 								agent : agent,
 							}, function(data) {
+								console.log(data);
 								if (data == '1') {
 									$("#btnnewPayment").removeAttr('disabled', 'disabled');
 									alert('Payment Recorded Successfully');
