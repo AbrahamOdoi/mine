@@ -67,7 +67,7 @@
 						</tr>
 						<tr style="text-align: center">
 							<td class="menuLabel">Logout</td>
-							<td></td>
+							<td class="menuLabel"></td>
 						</tr>
 					</table>
 
@@ -79,6 +79,47 @@
 			</div>
 			<!-- /footer -->
 		</div><!-- /page -->
+
+		<div data-role="page" id="comment">
+			<!-- Header -->
+			<div data-role="header" data-position='fixed' data-add-back-btn="true" style="padding-bottom:10px;  background:#921616;color:  #a1a96a;border: none; text-shadow: none;">
+				<a href="main.html" rel="external" data-transition='flip' data-icon='back' data-text="false" data-role="button" style="background:#921616;color:  #a1a96a;border: none; text-shadow: none;">Back</a>
+				<h1>Comment</h1>
+			</div>
+			<!-- /header -->
+			<!-- Content    -->
+			<div data-role="content">
+				<div style="text-align: center">
+					<img src="img/gears.gif" style="position:fixed; bottom: 0%; right:30%; z-index: 999; display: none;" id="loadingImage"/>
+					<div id="display" class="display" style="padding: 10px;background:skyblue;color:white;text-align: center;text-shadow: none;
+					font-weight:bolder;width:83%;position: fixed;bottom: 30%; left:0px;margin: 5%;z-index: 80px;display:none;border:1px solid gray;"></div>
+					<input type="hidden" name="clientName" value="" id="commentclientId" data-mini='true'/>
+
+					<label for="username" style="text-align: center">Client</label>
+					<input type="text" name="clientName" readonly="readonly" value="" id="commentclientName" data-mini='true'/>
+
+					<label for="password" style="text-align: center">Subject</label>
+					<input type="text" name="clientName" value="" id="commentsubject" data-mini='true'/>
+
+					<label for="mobile" style="text-align: center">Message</label>
+					<textarea cols="10" rows="100" id="commentmessage"></textarea>																																			
+
+
+
+
+
+
+
+
+
+					<button name="dss"  data-mini='true' id="commentproceed"  style="border-left: 1px solid #a1a96a; background: #a1a96a; color:white; text-shadow: none;">
+						PROCEED
+					</button>
+					<!-- </form> -->
+				</div>
+			</div>
+			<!-- /content -->
+		</div>
 
 		<!-- Start of NEW CLIENT page I -->
 		<div data-role="page" id="newClient">
@@ -478,7 +519,7 @@
 					collector_id : collector_id,
 					ho_id : ho_id
 				}, function(data) {
-
+					console.log(data);
 					if (data == 'true') {
 						alert('Client Added Successfully');
 
@@ -575,7 +616,7 @@
 					},
 					success : function(response, status, xhr) {//run this if check is successful
 						if (response == 'here') {
-							$.post("http://deywuro.com/mobile/goldmine/newPayment.php", {
+							$.post("http://deywuro.com/mobile/goldmine/bnewPayment.php", {
 								paymentClient : paymentClient,
 								paymentClientN : paymentClientN,
 								paymentType : paymentType,
@@ -585,6 +626,7 @@
 								payyear : payyear,
 								agent : agent,
 							}, function(data) {
+								console.log(data);
 								if (data == '1') {
 									$("#btnnewPayment").removeAttr('disabled', 'disabled');
 									alert('Payment Recorded Successfully');
@@ -826,6 +868,8 @@
 				output += '<br/>';
 				output += '<font color="gray" size="3px">Owing (GHs): </font>' + fetchClient['paid'] + '</a>';
 				output += '</li>';
+				output += '<br/>';
+				output += '<a href="#comment" style="text-decoration: none;" class="commentBtn"  value="' + fetchClient['clientId'] + '"  namee="' + fetchClient['name'] + '"><button class="btn btn-warning" style="background:orange; border:none; text-shadow:none">Comment</button></a>';
 
 			}
 			// console.log(output);
@@ -860,8 +904,58 @@
 				});
 			});
 
+			$(".commentBtn").click(function() {
+				// paID = $(this).value();
+				paIDs = $(this).attr('value');
+				pcnames = $(this).attr('namee');
+
+				$("#commentclientName").val(pcnames);
+				$("#commentclientId").val(paIDs);
+
+				// alert(paIDs);
+				// alert(pcnames);
+			});
+
 			checkStoredPayments();
 
+		});
+	</script>
+	<script>
+		$("#commentproceed").click(function() {
+			$("#loadingImage").show();
+			var clientid = $('#commentclientId').val();
+			var subject = $('#commentsubject').val();
+			var message = $('#commentmessage').val();
+
+			var creds = localStorage.getItem("creds");
+			var credsArr = creds.split("|");
+			var collector_id = credsArr[2];
+			alert(clientid);
+			if (subject == '' || message == '') {
+				alert('All fields required');
+				$("#loadingImage").hide();
+			} else {
+				$.post("http://deywuro.com/mobile/goldmine/newComment.php", {
+					clientid : clientid,
+					subject : subject,
+					message : message,
+					collector_id : collector_id
+				}, function(data) {
+					console.log(data);
+					if (data == 'true') {
+						alert('Comment Sent Successfully');
+
+						$('#commentclientId').val('');
+						$('#commentsubject').val('');
+						$('#commentmessage').val('');
+
+						$("#loadingImage").fadeOut(4000, function() {
+							window.location = 'main.html';
+						});
+
+					}
+				});
+			}
 		});
 	</script>
 
