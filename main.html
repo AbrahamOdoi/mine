@@ -601,7 +601,6 @@
 			//put payment in string for storage if offline
 			var store = paymentClient + '|' + paymentClientN + '|' + paymentAmount + '|' + agent + '|' + datetime + '|' + paymentType + '|' + service + '|' + paymonth + '|' + payyear;
 			// var paystring = store+'***';
-
 			//check of fields are not empty
 			if (paymentClient == '' || paymentAmount == '') {
 				alert('All fields required');
@@ -616,7 +615,7 @@
 					},
 					success : function(response, status, xhr) {//run this if check is successful
 						if (response == 'here') {
-							$.post("http://deywuro.com/mobile/goldmine/bnewPayment.php", {
+							$.post("http://deywuro.com/mobile/goldmine/newPayment.php", {
 								paymentClient : paymentClient,
 								paymentClientN : paymentClientN,
 								paymentType : paymentType,
@@ -866,10 +865,10 @@
 				output += '<br/>';
 				output += '<font color="gray" size="3px">Mobile Num: </font>' + fetchClient['official_phone'];
 				output += '<br/>';
-				output += '<font color="gray" size="3px">Owing (GHs): </font>' + fetchClient['paid'] + '</a>';
+				output += '<font color="gray" size="3px">GHs : </font>' + fetchClient['paid'] + '</a>';
 				output += '</li>';
 				output += '<br/>';
-				output += '<a href="#comment" style="text-decoration: none;" class="commentBtn"  value="' + fetchClient['clientId'] + '"  namee="' + fetchClient['name'] + '"><button class="btn btn-warning" style="background:orange; border:none; text-shadow:none">Comment</button></a>';
+				output += '<a href="#comment" style="text-decoration: none;" class="commentBtn"  value="' + fetchClient['id'] + '"  namee="' + fetchClient['name'] + '"><button class="btn btn-warning" style="background:orange; border:none; text-shadow:none">Comment</button></a>';
 
 			}
 			// console.log(output);
@@ -953,6 +952,8 @@
 							window.location = 'main.html';
 						});
 
+					}else{
+						alert(data);
 					}
 				});
 			}
