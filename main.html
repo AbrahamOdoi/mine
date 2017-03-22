@@ -28,7 +28,7 @@
 				padding-bottom: 30px;
 			}
 
-		</style> 
+		</style>
 	</head>
 	<body>
 
@@ -62,12 +62,12 @@
 							<td class="menuLabel"></td>
 						</tr>
 						<tr align="center">
+							<td><a href="#searchClientComment" rel="external" id='logout' data-transition='flow' style="font-weight: lighter;color: black; text-decoration: none;"><img src="img/chat.png" width="50%" /> </a></td>
 							<td><a href="login.html" rel="external" id='logout' data-transition='flow' style="font-weight: lighter;color: black; text-decoration: none;"><img src="img/exit.png" width="50%" /> </a></td>
-							<td></td>
 						</tr>
 						<tr style="text-align: center">
+							<td class="menuLabel">Comment</td>
 							<td class="menuLabel">Logout</td>
-							<td class="menuLabel"></td>
 						</tr>
 					</table>
 
@@ -80,7 +80,7 @@
 			<!-- /footer -->
 		</div><!-- /page -->
 
-		<div data-role="page" id="comment">
+		<div data-role="page" id="comment" >
 			<!-- Header -->
 			<div data-role="header" data-position='fixed' data-add-back-btn="true" style="padding-bottom:10px;  background:#921616;color:  #a1a96a;border: none; text-shadow: none;">
 				<a href="main.html" rel="external" data-transition='flip' data-icon='back' data-text="false" data-role="button" style="background:#921616;color:  #a1a96a;border: none; text-shadow: none;">Back</a>
@@ -102,7 +102,14 @@
 					<input type="text" name="clientName" value="" id="commentsubject" data-mini='true'/>
 
 					<label for="mobile" style="text-align: center">Message</label>
-					<textarea cols="10" rows="100" id="commentmessage"></textarea>																																			
+					<textarea cols="10" rows="100" id="commentmessage"></textarea>																																																																						
+
+
+
+
+
+
+
 
 
 
@@ -302,6 +309,40 @@
 			<!-- /content -->
 		</div>
 		<!-- /page -->
+
+		<!-- Start of comment client list page I -->
+		<div data-role="page" id="searchClientComment">
+			<!-- Header -->
+			<div data-role="header" data-position='fixed' data-add-back-btn="true" style="padding-bottom:10px;  background:#921616;color:  #a1a96a;border: none; text-shadow: none;">
+				<a href="main.html" rel="external" data-transition='flip' data-icon='back' data-text="false" data-role="button" style="background:#921616;color:  #a1a96a;border: none; text-shadow: none;">Back</a>
+				<h1>Clients</h1>
+			</div>
+			<!-- /header -->
+			<!-- Content    -->
+			<div data-role="content">
+				<div>
+					<div id="searchdisplay" class="display" style="padding: 10px;background:skyblue;color:white;text-align: center;text-shadow: none;
+					font-weight:bolder;width:83%;position: absolute;top: 45%; left:0px;margin: 5%;z-index: 80px;display:none;border:1px solid gray;"></div>
+
+				</div>
+
+				<div id="set" data-role="collapsible-set" data-content-theme="b">
+
+					<div id="set12">
+						<!-- <h3>ALL CLIENTS</h3> -->
+						<p>
+							<ul data-role='listview' data-inset='true' data-filter='true' id='wrpPendingComment' style='color:blue; cursor:pointer; width: 100%; height: 100%;' class='fetchedAllDetails'>
+
+							</ul>
+						</p>
+					</div>
+				</div>
+
+			</div>
+			<!-- /content -->
+		</div>
+		<!-- /page -->
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script type="text/javascript" src="cordova.js"></script>
 	</body>
@@ -670,10 +711,6 @@
 
 						var oldpay = localStorage.getItem("payment");
 
-						// alert(oldpay);
-						/*document.write(oldpay)
-						 document.write("<br/>")*/
-
 						if (oldpay) {
 							localStorage.setItem("payment", oldpay + '***' + store);
 						} else {
@@ -690,83 +727,8 @@
 					}
 				});
 
-				// $.post("newPayment.php", {
-				// 	paymentClient : paymentClient,
-				// 	paymentClientN : paymentClientN,
-				// 	// paymentType : paymentType,
-				// 	paymentAmount : paymentAmount
-				// }, function(data) {
-				// 	if (data == '1') {
-				// 		$("#btnnewPayment").removeAttr('disabled', 'disabled');
-				// 		$("#paydisplay").html('Payment Recorded Successfully');
-
-				// 		$('#paymentClient').val('');
-				// 		$('#paymentClientN').val('');
-				// 		$('#paymentAmount').val('');
-
-				// 		$("#paydisplay").fadeOut(1000);
-
-				// 	} else {
-				// 		alert(data);
-				// 		$("#paydisplay").html('Operation Unsuccessful. Try again' + data);
-				// 		$("#paydisplay").css('color', 'red');
-				// 		$("#paydisplay").fadeIn();
-				// 		$("#paydisplay").fadeOut(1000);
-				// 		$("#btnnewPayment").removeAttr('disabled', 'disabled');
-
-				// 	};
-				// });
 			}
 		}
-
-		// function newPayment() {
-		// 	$("#paydisplay").html('Processing...');
-		// 	$("#paydisplay").show();
-		// 	var paymentClient = $('#paymentClient').val();
-		// 	var paymentClientN = $('#paymentClientN').val();
-		// 	var paymentType = $('#paymentType').val();
-		// 	var paymentAmount = $('#paymentAmount').val();
-
-		// 	if (paymentClient == '' || paymentType == '' || paymentAmount == '') {
-		// 		$("#paydisplay").html('All fields required');
-		// 		$("#paydisplay").css('color', 'red');
-		// 		$("#paydisplay").fadeOut(8000);
-		// 	} else {
-
-		// 		$.post("newPayment.php", {
-		// 			paymentClient : paymentClient,
-		// 			paymentClientN : paymentClientN,
-		// 			paymentType : paymentType,
-		// 			paymentAmount : paymentAmount
-		// 		}, function(data) {
-		// 			$("#paydisplay").html(data);
-
-		// 			// $('#paymentClient').val('');
-		// 			// $('#paymentClientN').val('');
-		// 			$('#paymentAmount').val('');
-
-		// 			$("#paydisplay").fadeOut(9000);
-
-		// 			// if (data == '1') {
-		// 			// $("#paydisplay").html('Payment Recorded Successfully');
-		// 			//
-		// 			// $('#paymentClient').val('');
-		// 			// $('#paymentClientN').val('');
-		// 			// $('#paymentAmount').val('');
-		// 			//
-		// 			// $("#paydisplay").fadeOut(9000);
-		// 			//
-		// 			// } else {
-		// 			// alert(data);
-		// 			// $("#paydisplay").html('Operation Unsuccessful. Try again' + data);
-		// 			// $("#paydisplay").css('color', 'red');
-		// 			// $("#paydisplay").fadeIn();
-		// 			// $("#paydisplay").fadeOut(9000);
-		// 			//
-		// 			// };
-		// 		});
-		// 	}
-		// }
 
 	</script>
 	<script>
@@ -838,6 +800,7 @@
 		});
 
 		$(document).ready(function() {
+
 			var creds = localStorage.getItem("creds");
 			creds = creds.split("|");
 			var agent = creds[0];
@@ -853,6 +816,7 @@
 				return el;
 			});
 			var output = "";
+			var outputComment = "";
 			// console.log(clnts_arr)
 			var arrayLength = clnts_arr.length;
 			for (var i = 0; i < arrayLength; i++) {
@@ -867,12 +831,21 @@
 				output += '<br/>';
 				output += '<font color="gray" size="3px">GHs : </font>' + fetchClient['paid'] + '</a>';
 				output += '</li>';
-				output += '<br/>';
-				output += '<a href="#comment" style="text-decoration: none;" class="commentBtn"  value="' + fetchClient['id'] + '"  namee="' + fetchClient['name'] + '"><button class="btn btn-warning" style="background:orange; border:none; text-shadow:none">Comment</button></a>';
+
+				outputComment += '<li value="' + fetchClient['clientId'] + '" class="clientDetail clientMakeComment" data-collector_id="' + fetchClient['agent_id'] + '" data-name="' + fetchClient['name'] + '" data-value="' + fetchClient['clientId'] + '">';
+				outputComment += '<a href="#comment" style="text-decoration: none;" value="' + fetchClient['clientId'] + '" > <font color="gray" size="3px">Name:</font>' + fetchClient['name'];
+				outputComment += '<br/>';
+				outputComment += '<font color="gray" size="3px">ClientID: </font>' + fetchClient['clientId'];
+				outputComment += '<br/>';
+				outputComment += '<font color="gray" size="3px">Mobile Num: </font>' + fetchClient['official_phone'];
+				outputComment += '<br/>';
+				outputComment += '<font color="gray" size="3px">GHs : </font>' + fetchClient['paid'] + '</a>';
+				outputComment += '</li>';
 
 			}
 			// console.log(output);
 			$('#wrpPending').html(output);
+			$('#wrpPendingComment').html(outputComment);
 
 			//####fetch services
 			var services_json = localStorage.getItem("services");
@@ -902,6 +875,23 @@
 					$('#paymentClientN').val(data);
 				});
 			});
+			$(".clientMakeComment").click(function() {
+				paID = $(this).data('value');
+				pcname = $(this).data('name');
+
+				$('#commentclientName').val(pcname);
+				$('#commentclientId').val(paID);
+				
+				pcollector_id = $(this).data('collector_id');
+				$("#paymentClient").val(paID);
+				$("#paymentClientN").val(pcname);
+				$("#pcollector_id").val(pcollector_id);
+				$.post("http://deywuro.com/mobile/goldmine/fetchclient.php", {
+					clientid : paID,
+					collector_id : pcollector_id
+				}, function(data) {
+				});
+			});
 
 			$(".commentBtn").click(function() {
 				// paID = $(this).value();
@@ -929,7 +919,7 @@
 			var creds = localStorage.getItem("creds");
 			var credsArr = creds.split("|");
 			var collector_id = credsArr[2];
-			
+
 			if (subject == '' || message == '') {
 				alert('All fields required');
 				$("#loadingImage").hide();
@@ -946,13 +936,13 @@
 
 						$('#commentclientId').val('');
 						$('#commentsubject').val('');
-						$('#commentmessage').val(''); 
+						$('#commentmessage').val('');
 
 						$("#loadingImage").fadeOut(4000, function() {
 							window.location = 'main.html';
 						});
 
-					}else{
+					} else {
 						alert(data);
 					}
 				});
