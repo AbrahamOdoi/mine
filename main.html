@@ -160,8 +160,6 @@
 
 					<label for="serviceType" style="text-align: center">Service</label>
 					<select name="clientServiceType" id="clientServiceType" data-mini='true' >
-						<option value="HH">HH</option>
-						<option value="Co">Co</option>
 					</select>
 
 					<label for="bins" style="text-align: center">Bins</label>
@@ -859,7 +857,9 @@
 			var arrayLength = services_arr.length;
 			for (var j = 0; j < arrayLength; j++) {
 				$('#service').append($("<option></option>").text(services_arr[j]));
+				$('#clientServiceType').append($("<option></option>").text(services_arr[j]));
 			}
+			
 			$(".clientMakePayment").click(function() {
 				// paID = $(this).value();
 				paID = $(this).data('value');
